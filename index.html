@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Rides - Book Your Bus</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header> 
+        <nav>
+            <div class="logo">
+                <img src="logo2.png" alt="Quickrides logo2">
+                <h1>Quick Rides</h1>
+            </div>
+            <!-- Toggle button for mobile -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <!-- Navigation menu -->
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="booking.html">Book Ticket</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">services</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="offer-banner">
+        <div class="offer-text">
+            🚎<strong>Summer Sale:</strong> “🚎 BOOK NOW AND GET 50%  OFF ON YOUR NEXT BOOKINGS!!!Offer Ends Soon!”
+        </div>
+        
+    </section>
+
+    <section class="hero">
+        <h1>Welcome to "Quick Rides"– your trusted partner in seamless and affordable bus travel.</h1>
+        <h2>At Quick Rides, we are committed to revolutionizing the way you travel by road.</h2>
+        <p> With a user-friendly platform, we make bus booking easy, fast, and reliable.</p>
+        <p>Whether you're planning a quick weekend getaway or a long-distance journey, we connect you with a wide network of trusted bus operators to ensure a comfortable and safe ride.</p>
+        <a href="booking.html"><button class="cta-button">Get Started</button></a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Quick Rides. All Rights Reserved.</p>
+        <p>Contact us: support@Quickrides.com | +1 234 567 890</p>
+    </footer>
+    <!-- JavaScript to handle menu toggle -->
+    <script>
+        function toggleMenu() {
+            const navList = document.querySelector('.nav-list');
+            navList.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

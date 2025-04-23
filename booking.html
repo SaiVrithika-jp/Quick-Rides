@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <nav>
+      
+      <h1>QUICK RIDES</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="booking.html">Book Ticket</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="services.html">services</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="booking" class="booking-form">
+    <h2>Book Your Bus</h2>
+    <form id="flightForm" action="payment.html" method="GET">
+        
+        
+        
+        <label for="from">From:</label>
+        <select id="from" name="from" required>
+            <option value="" disabled selected>Select Departure Place</option>
+            <option value="BLR">Banglore</option>
+            <option value="MYS">Mysore</option>
+            <option value="UBL">Hubli</option>
+            <option value="MAQ">Manglore</option>
+            <option value="BGM">Belgaum</option>
+            <option value="TK">Tumkur</option>
+            <option value="KQZ">Kolar</option>
+            <option value="HSRA">Hosur</option>
+            
+            
+        </select>
+        <label for="to">To:</label>
+        <select id="to" name="to" required>
+            <option value="" disabled selected>Select Destination Place</option>
+            <option value="BLR">Banglore</option>
+            <option value="MYS">Mysore</option>
+            <option value="UBL">Hubli</option>
+            <option value="MAQ">Manglore</option>
+            <option value="BGM">Belgaum</option>
+            <option value="TK">Tumkur</option>
+            <option value="KQZ">Kolar</option>
+            <option value="HSRA">Hosur</option>
+        </select>
+
+    <label for="travelDate">Travel Date:</label>
+    <input type="date" id="travelDate" required />
+
+    <label for="passengers">Number of Passengers:</label>
+    <input type="number" id="passengers" min="1" value="1" onchange="renderSeatSelection()" />
+
+    
+    
+    <div id="seatSelectionContainer"></div>
+
+    <h3>Total Price: <span id="totalPrice">1000/-</span></h3>
+
+    <button onclick="proceedToPayment()">Proceed to Payment</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Quickrides. All Rights Reserved.</p>
+    <p>Contact us: support@Quickrides.com | +1 234 567 890</p>
+</footer>
+</body>
+</html>

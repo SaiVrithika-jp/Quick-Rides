@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .confirmation-message {
+            color: rgb(243, 111, 64);
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const bookingDetails = JSON.parse(localStorage.getItem("bookingDetails"));
+
+            if (bookingDetails) {
+                document.getElementById("booking-date").textContent = bookingDetails.date;
+                document.getElementById("booking-passengers").textContent = bookingDetails.passengers;
+                document.getElementById("booking-total").textContent = bookingDetails.totalPrice;
+
+                const seatList = document.getElementById("booking-seats");
+                bookingDetails.seats.forEach((seat, index) => {
+                    const li = document.createElement("li");
+                    li.textContent = `Passenger ${index + 1}: ${seat}`;
+                    seatList.appendChild(li);
+                });
+            }
+
+            document.getElementById("makePaymentBtn").addEventListener("click", function () {
+                document.getElementById("paymentFormContainer").innerHTML = `
+                    <section id="payment" class="payment">
+                        <h2>Payment</h2>
+                        <p>Enter payment details to confirm booking.</p>
+
+                        <label for="card">Card Number:</label>
+                        <input type="text" id="card" required><br><br>
+
+                        <label for="expiry">Expiry Date:</label>
+                        <input type="date" id="expiry" required><br><br>
+
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" required><br><br>
+
+                        <button type="button" id="confirmBookingBtn">Confirm Booking</button>
+
+                        <div class="confirmation-message" id="confirmationMessage"></div>
+                        <button id="downloadBtn" style="display:none; margin-top: 10px;">Download Ticket</button>
+                    </section>
+                `;
+
+                document.getElementById("confirmBookingBtn").addEventListener("click", function () {
+                    if (!bookingDetails || !bookingDetails.date) {
+                        alert("Travel date missing. Please return to booking page.");
+                        return;
+                    }
+
+                    localStorage.removeItem("bookingDetails");
+
+                    const message = document.getElementById("confirmationMessage");
+                    message.style.display = "block";
+                    message.textContent = "✅ Payment successful! Thank you for booking with Quick Rides.";
+
+                    document.getElementById("downloadBtn").style.display = "inline-block";
+                });
+
+                document.getElementById("downloadBtn").addEventListener("click", function () {
+                    const content = `
+Quick Rides\n
+Date of Travel: ${bookingDetails.date}\n
+Number of Passengers: ${bookingDetails.passengers}\n
+Seats Selected:\n${bookingDetails.seats.map((seat, i) => `                    Passenger ${i + 1}: ${seat}`).join("\n")}\n
+Total Price: ${bookingDetails.totalPrice}\n
+Thank you for choosing Quick Rides!`;
+
+                    const blob = new Blob([content], { type: "text/plain" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "ticket.txt";
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            
+            <h1>Quick Rides</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="booking.html">Book Ticket</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <form>
+        <section class="payment-summary">
+            <b><h2>Payment Summary</h2></b>
+            <p><strong>Date of Travel : </strong> <span id="booking-date"></span></p>
+            <p><strong>Number of Passengers : </strong> <span id="booking-passengers"></span></p>
+            <p><strong>Seats Selected : </strong></p>
+            <ol id="booking-seats"></ol>
+            <p><strong>Total Price : </strong> <span id="booking-total"></span></p>
+
+            <button type="button" id="makePaymentBtn">Make Payment</button>
+        </section>
+
+        <div id="paymentFormContainer"></div>
+    </form>
+
+    <footer>
+        <p>&copy; 2025 Quick Rides. All Rights Reserved.</p>
+        <p>Contact us: support@Quickrides.com | +1 234 567 890</p>
+    </footer>
+</body>
+</html>
